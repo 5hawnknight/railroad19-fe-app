@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="description" content="This challenge is to help us to assess your ability to plan, test, and report your findings"/>
+    <meta name="author" content="Railroad19, Inc."/>
+
+    <title>QA Engineer Challenge</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style media="all" type="text/css">
+        .special-instructions{
+          width: 100%;
+          padding-bottom: 24px;
+          margin-bottom: 64px;
+          background-color: rgb(255, 238, 160);
+          border-top: 1px solid #A3333A;
+          border-bottom: 1px solid #A3333A;
+        }
+        #navbar {
+            float: right;
+        }
+        #main p, #main li {
+            max-width: 740px;
+        }
+        #main li {
+            line-height: 1.25em;
+            margin-bottom: 8px;
+        }
+        #main li > ul {
+            margin-top: 4px;
+            margin-bottom: 12px;
+        }
+        .navbar{
+            background-color: #A3333A;
+            border-color: #A3333A;
+        }
+        #navbar a{
+            color: white;
+        }
+        #navbar a:hover{
+            color: black;
+        }
+        .navbar-header .navbar-brand, .navbar-header .navbar-brand:hover{
+            color: white;
+        }
+        .border-top{
+          padding-top: 6px;
+          border-top: 1px dotted grey;
+        }
+        .navbar{
+          border-radius: 0px;
+        }
+        .requirements-list li{
+          margin-bottom: 12px;
+          max-width: 720px;
+        }
+        h3{
+          padding-top: 48px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="special-instructions">
+
+  <nav class="navbar navbar-inverse ">
+      <div class="container">
+          <div class="navbar-header">
+              <span class="navbar-brand">QA Challenge</span>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                  <li><a href="mailto:fantauzzi@railroad19.com" title="Contact Zack Fantauzzi with questions">Questions?</a> </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+
+  <div class="container" id="main">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1>QA Challenge</h1>
+        <div class="row">
+            <div class="col-xs-12">
+                <p>This challenge is to help us to assess your ability to plan, test, and report your findings. This document outlines a mock, single page application that was built by a UI/UX Candidate.
+                  The original requirements are outlined below and the resulting single page proof of concept (included) was their submission. </p>
+
+                <p>Please <a title="Contact Zack Fantauzzi with questions" href="mailto:fantauzzi@railroad19.com">contact us</a> with any questions, as time is important to this exercise.</p>
+            </div>
+        </div>
+
+        <h3>Goals</h3>
+        <div class="row">
+          <div class="col-xs-12">
+            <p>We would like you to complete the following three tasks to varying degrees of fidelity:</p>
+            <ol>
+              <li>Create a test plan outlining your approach to testing this page. As part of that outline, select a portion of it (at your discretion) and go into enough detail to help support step 2</li>
+              <li>Create some sample automated tests and manual tests to illustrate a portion of your test plan</li>
+              <li>Create a document to report your findings</li>
+            </ol>
+            <p>The overall goal is to show us how you execute and communicate. Do as little, or as much, as you feel is needed to illustrate your abilities.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm-4">
+        <h3 style="margin-top: 32px;">Table of Contents</h3>
+        <ul>
+          <li><a href="#app_description">Application Description</a></li>
+          <li><a href="#data_overview">Overview of Application Data Model</a></li>
+          <li><a href="#functional_requirements">Application Functional Requirements</a></li>
+          <li><a href="#tech_requirements">Application Technical Requirements</a></li>
+          <li><a href="#data_set">Application Data Set</a></li>
+          <li><a href="#running">Running the Application</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="body">
+    <h3><a name="app_description"></a>Application Description</h3>
+    <div class="row" style="max-width: 640px;">
+      <div class="col-xs-12">
+        <p class="well well-sm"><i>The following section outlines the requirements that were given to the UI/UX candidate. The candidate was allowed to use what they wanted to in terms of technology but we asked that they solution it with AngularJS at the very least.</i></p>
+      </div>
+    </div>
+
+    <div class="row" style="max-width: 640px;">
+        <div class="col-xs-12">
+            <p>As part of a new application the UI/UX resource has been tasked with creating a landing page/dashboard
+                (prototype) to show at the next Managers Meeting. This landing page will allow users to access all the
+                available 'records' for a specific set of data with some additional features outlined below.</p>
+        </div>
+        <div class="col-xs-12">
+            <h3><a name="data_overview"></a>Overview of Application Data Model <small>(see <a href="#mockdata">Mocked Data</a>)</small></h3>
+
+            <p>Each record in the model contains the following properties:</p>
+            <ul>
+                <li>Title – Text</li>
+                <li>Division - Text</li>
+                <li>Project Owner - Text</li>
+                <li>Budget – Number, should be displayed as dollars: $XXX.XX</li>
+                <li>Status - Text</li>
+                <li>Created Date – date: MM/DD/YYYY</li>
+                <li>Modified Date – date: MM/DD/YYYY</li>
+            </ul>
+        </div>
+        <div class="col-xs-12">
+            <h3><a name="functional_requirements"></a>Application Functional Requirements</h3>
+            <ul class="requirements-list">
+                <li>Users need to be able to filter/search for the records on any one of the given properties of
+                    a record. When filter/searching by date users will supply a range, all other fields would
+                    use their corresponding data type. Users can use more than one filter at a time.
+                </li>
+                <li>Each record needs to allow a user to: change the status, change the Project Owner, and
+                    adjust the budget. These features should be available in-line without going to another page.
+                    When a record is changed please provide some sort of feedback to the user.
+                </li>
+                <li>Each record needs to supply a link/button/etc to go to a more in-depth page. The link is not
+                    active and you don’t need to create the secondary page. This is only to show that each
+                    record gives the user the ability to go to another page.
+                </li>
+                <li>Management has asked that the screen offer some high-level/summations/statistics about the
+                    current records. They are not interested in charts/graphics (they are minimalists at heart),
+                    but want some statistics related to the records in the UI, something that tells the story at
+                    a glance. They have given you some discretion in terms of what to show and how to show it,
+                    but it should reflect the current dataset.
+                </li>
+                <li>Please provide inactive/placeholder (non-working) UI elements for Users to:
+                    <ul>
+                        <li>add a new record</li>
+                        <li>export the records on screen to Excel or PDF</li>
+                    </ul>
+                </li>
+                <li>The name/title of the application/page is: Project Dashboard</li>
+            </ul>
+        </div>
+        <div class="col-xs-12">
+            <h3><a name="tech_requirements"></a>Application Technical Requirements</h3>
+
+            <p>Users will be using this from their desktop on at least a 1280x768 monitor. There is no need to
+                build this to be mobile friendly, as most users will use this on their desktop. The target
+                browser is the latest stable version of Chrome.</p>
+        </div>
+    </div>
+
+    <a name="mockdata"></a>
+
+    <h3><a name="data_set"></a>Application Data Set</h3>
+
+    <div class="row">
+        <div class="col-xs-12">
+
+<textarea class="form-control" rows="50">
+  [{
+    "title": "Tagtune",
+    "division": "Accounting",
+    "project_owner": "Kevin Snyder",
+    "budget": 20614.14,
+    "status": "archived",
+    "created": "09/14/2015",
+    "modified": "10/02/2015"
+  }, {
+    "title": "Oyoyo",
+    "division": "Administration",
+    "project_owner": "Eugene Brown",
+    "budget": 22106.44,
+    "status": "new",
+    "created": "07/17/2015",
+    "modified": null
+  }, {
+    "title": "Lajo",
+    "division": "Marketing",
+    "project_owner": "Killgore Trout",
+    "budget": 15481.27,
+    "status": "working",
+    "created": "07/19/2015",
+    "modified": "09/17/2015"
+  }, {
+    "title": "Blognation",
+    "division": "Administration",
+    "project_owner": "Richard Henry",
+    "budget": 24017.98,
+    "status": "working",
+    "created": "08/03/2015",
+    "modified": "09/17/2015"
+  }, {
+    "title": "Vinte",
+    "division": "Administration",
+    "project_owner": "Michelle Webb",
+    "budget": 12935.84,
+    "status": "working",
+    "created": "08/05/2015",
+    "modified": "09/15/2015"
+  }, {
+    "title": "Aibox",
+    "division": "Administration",
+    "project_owner": "Killgore Trout",
+    "budget": 15991.78,
+    "status": "working",
+    "created": "09/03/2015",
+    "modified": "10/02/2015"
+  }, {
+    "title": "Buzzdog",
+    "division": "Administration",
+    "project_owner": "Michelle Webb",
+    "budget": 22610.09,
+    "status": "archived",
+    "created": "07/26/2015",
+    "modified": "10/01/2015"
+  }, {
+    "title": "Plambee",
+    "division": "Sales",
+    "project_owner": "Michelle Webb",
+    "budget": 14229.02,
+    "status": "archived",
+    "created": "09/14/2015",
+    "modified": "10/01/2015"
+  }, {
+    "title": "Photobug",
+    "division": "Administration",
+    "project_owner": "James Holden",
+    "budget": 10959.29,
+    "status": "working",
+    "created": "09/03/2015",
+    "modified": "09/18/2015"
+  }, {
+    "title": "Quimm",
+    "division": "Marketing",
+    "project_owner": "James Holden",
+    "budget": 14139.38,
+    "status": "delivered",
+    "created": "08/02/2015",
+    "modified": "09/26/2015"
+  }, {
+    "title": "Innojam",
+    "division": "Sales",
+    "project_owner": "Eugene Brown",
+    "budget": 24318.05,
+    "status": "working",
+    "created": "09/13/2015",
+    "modified": "09/20/2015"
+  }, {
+    "title": "Jaxworks",
+    "division": "Production",
+    "project_owner": "Michelle Webb",
+    "budget": 15054.27,
+    "status": "new",
+    "created": "08/12/2015",
+    "modified": null
+  }, {
+    "title": "Skyble",
+    "division": "Accounting",
+    "project_owner": "Richard Henry",
+    "budget": 13810.1,
+    "status": "delivered",
+    "created": "07/12/2015",
+    "modified": "09/21/2015"
+  }, {
+    "title": "Photobean",
+    "division": "Marketing",
+    "project_owner": "Michelle Webb",
+    "budget": 12637.95,
+    "status": "working",
+    "created": "08/24/2015",
+    "modified": "09/15/2015"
+  }, {
+    "title": "Topicware",
+    "division": "Administration",
+    "project_owner": "Eugene Brown",
+    "budget": 9667.52,
+    "status": "working",
+    "created": "08/01/2015",
+    "modified": "09/29/2015"
+  }, {
+    "title": "Buzzster",
+    "division": "Production",
+    "project_owner": "Nicole Smith",
+    "budget": 14657.54,
+    "status": "working",
+    "created": "08/09/2015",
+    "modified": "09/18/2015"
+  }, {
+    "title": "Twinte",
+    "division": "Administration",
+    "project_owner": "Kevin Snyder",
+    "budget": 17729.37,
+    "status": "delivered",
+    "created": "09/09/2015",
+    "modified": "09/18/2015"
+  }, {
+    "title": "Blognation",
+    "division": "Production",
+    "project_owner": "Eugene Brown",
+    "budget": 19540.82,
+    "status": "archived",
+    "created": "07/21/2015",
+    "modified": "09/22/2015"
+  }, {
+    "title": "Flashdog",
+    "division": "Production",
+    "project_owner": "Michelle Webb",
+    "budget": 24870.61,
+    "status": "working",
+    "created": "07/05/2015",
+    "modified": "10/02/2015"
+  }, {
+    "title": "Yakijo",
+    "division": "Accounting",
+    "project_owner": "Killgore Trout",
+    "budget": 23533.54,
+    "status": "working",
+    "created": "08/12/2015",
+    "modified": "10/01/2015"
+  }, {
+    "title": "Quatz",
+    "division": "Sales",
+    "project_owner": "Richard Henry",
+    "budget": 23639.65,
+    "status": "archived",
+    "created": "07/19/2015",
+    "modified": "09/19/2015"
+  }, {
+    "title": "Dabjam",
+    "division": "Marketing",
+    "project_owner": "Kevin Snyder",
+    "budget": 14356.55,
+    "status": "new",
+    "created": "08/22/2015",
+    "modified": null
+  }, {
+    "title": "Meetz",
+    "division": "Sales",
+    "project_owner": "Kevin Snyder",
+    "budget": 13882.22,
+    "status": "delivered",
+    "created": "08/26/2015",
+    "modified": "10/01/2015"
+  }, {
+    "title": "Flipopia",
+    "division": "Marketing",
+    "project_owner": "Eugene Brown",
+    "budget": 10306.87,
+    "status": "delivered",
+    "created": "08/11/2015",
+    "modified": "09/17/2015"
+  }, {
+    "title": "Quaxo",
+    "division": "Administration",
+    "project_owner": "Nicole Smith",
+    "budget": 13945.69,
+    "status": "archived",
+    "created": "07/13/2015",
+    "modified": "09/21/2015"
+  }, {
+    "title": "Trunyx",
+    "division": "Production",
+    "project_owner": "Nicole Smith",
+    "budget": 23136.21,
+    "status": "delivered",
+    "created": "09/03/2015",
+    "modified": "09/19/2015"
+  }, {
+    "title": "Dabtype",
+    "division": "Marketing",
+    "project_owner": "Richard Henry",
+    "budget": 22000.98,
+    "status": "archived",
+    "created": "08/26/2015",
+    "modified": "09/28/2015"
+  }, {
+    "title": "Meetz",
+    "division": "Marketing",
+    "project_owner": "Eugene Brown",
+    "budget": 17620.23,
+    "status": "new",
+    "created": "09/08/2015",
+    "modified": null
+  }, {
+    "title": "Kimia",
+    "division": "Sales",
+    "project_owner": "Richard Henry",
+    "budget": 12061.73,
+    "status": "archived",
+    "created": "08/31/2015",
+    "modified": "09/29/2015"
+  }, {
+    "title": "Dazzlesphere",
+    "division": "Accounting",
+    "project_owner": "Eugene Brown",
+    "budget": 21443.97,
+    "status": "archived",
+    "created": "07/20/2015",
+    "modified": "10/01/2015"
+  }]
+</textarea>
+        </div>
+    </div>
+</div>
+
+
+<div class="special-instructions" style="margin-top: 24px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3><a name="running"></a>Running the Application</h3>
+        <p>The following instructions should be run from the command line at the root of the <kbd>app</kbd> directory.</p>
+        <p>The application uses NodeJS to run a small local server. In order to run the app you will need to install node, bower, and grunt:</p>
+        <ol>
+          <li>Node.js and npm (https://nodejs.org) Node ^4.2.3, npm ^2.14.7</li>
+          <li>Bower (http://bower.io/) <kbd>npm install --global bower</kbd></li>
+          <li>Grunt (http://gruntjs.com/) <kbd>npm install --global grunt-cli</kbd></li>
+        </ol>
+        <p>Once the above resources have been installed follow these steps to get the resources and run the applciaiton:</p>
+        <ol>
+          <li>Run <kbd>npm install</kbd> to install grunt and node modules dependencies.</li>
+          <li>Run <kbd>bower install</kbd> to install front-end dependencies.</li>
+          <li>Run <kbd>grunt serve</kbd> to start the development server. It should automatically open the client in your browser when ready.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted text-right">&copy; 2019 Railroad19</p>
+    </div>
+</footer>
+
+</body>
+</html>

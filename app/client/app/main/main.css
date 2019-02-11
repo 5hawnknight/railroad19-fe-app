@@ -1,0 +1,68 @@
+.sideNavbar {
+    max-width: 120px;
+    min-height: 100vh;
+}
+
+.sideNavHeader {
+    background-color: rgb(231, 87, 83) !important;
+}
+
+.headerContent {
+    text-align: center;
+}
+
+.colorPrime {
+    color: rgb(231, 87, 83);
+}
+
+#searchCard {
+    width: 68%;
+}
+
+#editIcon {
+    height: 10px;
+    right: 0;
+    position: absolute;
+    cursor: pointer;
+}
+
+#editInput {
+    margin: 0px;
+    max-height: 15px;
+}
+
+#moreInfoButton {
+    float: right;
+}
+
+#dashboardImg {
+    height: 60px;
+    margin-left: 27px;
+}
+
+.listItems {
+    margin-left: 20px;
+}
+
+#searchContainer {
+    margin: 0px 30px;
+    margin-top: 40px;
+}
+
+#mainContnet {
+    padding-left: 5%;
+    max-width: 96%;
+}
+
+#statsRow {
+    max-width: 83%;
+}
+
+#recordStats {
+    padding: 0 20px;
+}
+
+.stackHeader {
+    font-size: 22px;
+    text-align: center;
+}

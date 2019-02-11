@@ -1,0 +1,32 @@
+<div class="row">
+    <md-card class="col-sm-3 projCard" ng-repeat="project in datasource | advanceSearch:searchFilters" data-tea-record={{project.title}}>
+        <md-subheader class="md-primary">{{project.title}}</md-subheader>
+        <div class="projectFields">Division:<span id="projSpan"> {{project.division}}</span></div>
+        <div layout="row" class="projectFields">Project Owner:
+            <span id="projSpan" ng-show="changeOwner !== $index" data-tea-project-owner-label=""> {{project.project_owner}} </span>
+            <img flex="10" id="editIcon" src="assets/images/edit.svg" alt="" ng-click="toggleOwner($index, project)" data-tea-project-owner-edit-button="">
+            <md-input-container id="editInput" ng-show="changeOwner === $index">
+                <input type="text" ng-model="project.project_owner" data-tea-project-owner-textbox="">
+            </md-input-container>
+        </div>
+        <div layout="row" class="projectFields">Budget:
+            <span id="projSpan" ng-show="adjustBudget !== $index" data-tea-budget-label=""> {{project.budget | currency}}</span>
+            <img flex="10" id="editIcon" src="assets/images/edit.svg" alt="" ng-click="toggleBudget($index, project)" data-tea-budget-edit-button="">
+            <md-input-container id="editInput" ng-show="adjustBudget === $index">
+                <input type="text" ng-model="project.budget" data-tea-budget-textbox="">
+            </md-input-container>
+        </div>
+        <div layout="row" class="projectFields">Status:
+            <span id="projSpan" ng-show="changeStatus !== $index" ng-class="{colorPrime: project.status ==  'new'}" data-tea-status-label=""> {{project.status}}</span>
+            <img flex="10" id="editIcon" src="assets/images/edit.svg" alt="" ng-click="toggleStatus($index, project)" data-tea-status-edit-button="">
+            <md-input-container id="editInput" ng-show="changeStatus === $index">
+                <input type="text" ng-model="project.status" data-tea-status-textbox="">
+            </md-input-container>
+        </div>
+        <div class="projectFields">Date Created:<span id="projSpan"> {{project.created}}</span></div>
+        <div class="projectFields">Date Modified:<span id="projSpan"> {{project.modified || 'NA'}}</span></div>
+        <div>
+            <md-button id="moreInfoButton" class="md-primary" data-tea-more-info-button="">More Info</md-button>
+        </div>
+    </md-card>
+</div>
